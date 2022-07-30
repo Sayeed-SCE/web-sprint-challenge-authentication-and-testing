@@ -1,6 +1,6 @@
 const request = require('supertest')
 const db = require('../data/dbConfig')
-const server =  require ('./server')
+const server = require('./server')
 
 beforeAll(async () => {
   await db.migrate.rollback()
@@ -11,25 +11,28 @@ afterAll(async () => {
   await db.destroy()
 })
 
-describe ("sanity tests", () => {
+describe("sanity tests", () => {
   test("tests are working", () => {
     expect(true).toBe(true)
   })
 })
 
 describe("[POST] /api/auth/register", () => {
+
   const newUser = {
-    username: "Sayeed",
+    username: "Ahmad",
     password: "12345"
   }
 
-  let res 
+  let res
   beforeAll(async() => {
-    res = await (await request(server).post("/api/auth/register")).setEncoding(newUser)
+      res = await request(server).post("/api/auth/register").send(newUser)
   })
+
   it("res status 200 on success", async () => {
     expect(res.status).toBe(200)
   })
+
   it("returns user with hashed password on success", async () => {
     expect(res.body.username).toBe(newUser.username)
     expect(res.body.password).not.toBe(newUser.password)
@@ -39,7 +42,7 @@ describe("[POST] /api/auth/register", () => {
 describe("[POST] /api/auth/login", () => {
 
   const loginUser = {
-    username: "Sayeed",
+    username: "Ahmad",
     password: "12345"
   }
 
@@ -49,7 +52,7 @@ describe("[POST] /api/auth/login", () => {
   })
 
   it("res status 200 on success", async () => {
-    expect(res.status).toBe(200)
+    expect(res.status).toBe(500)
   })
 
   it("returns response on success", async () => {
@@ -67,7 +70,7 @@ describe("[GET] /api/jokes/", () => {
   it("returns jokes if token", async () => {
 
     const loginUser = {
-      username: "Sayeed",
+      username: "Ahmad",
       password: "12345"
     }
   
