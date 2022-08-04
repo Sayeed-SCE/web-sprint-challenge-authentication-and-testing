@@ -6,10 +6,17 @@ beforeAll(async () => {
   await db.migrate.rollback()
   await db.migrate.latest()
 })
+// beforeAll(done => {
+//   done()
+// })
 
 afterAll(async () => {
   await db.destroy()
 })
+// afterAll(done => {
+//   server.close();
+//   done();
+// });
 
 describe("sanity tests", () => {
   test("tests are working", () => {
@@ -20,7 +27,7 @@ describe("sanity tests", () => {
 describe("[POST] /api/auth/register", () => {
 
   const newUser = {
-    username: "Ahmad",
+    username: "Sayeed",
     password: "12345"
   }
 
@@ -42,7 +49,7 @@ describe("[POST] /api/auth/register", () => {
 describe("[POST] /api/auth/login", () => {
 
   const loginUser = {
-    username: "Ahmad",
+    username: "Sayeed",
     password: "12345"
   }
 
@@ -52,7 +59,7 @@ describe("[POST] /api/auth/login", () => {
   })
 
   it("res status 200 on success", async () => {
-    expect(res.status).toBe(500)
+    expect(res.status).toBe(200)
   })
 
   it("returns response on success", async () => {
@@ -70,7 +77,7 @@ describe("[GET] /api/jokes/", () => {
   it("returns jokes if token", async () => {
 
     const loginUser = {
-      username: "Ahmad",
+      username: "Sayeed",
       password: "12345"
     }
   

@@ -90,7 +90,7 @@ router.post('/login', checkPayload, (req, res, next) => {
     username: user.username, 
   };
   const options = {
-    expiresIn: 'id',
+    expiresIn: '1d',
 
   };
   return jwt.sign(payload, JWT_SECRET, options);
